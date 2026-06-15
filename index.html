@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Devereaux Method — A Championship Hitting System</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0B1F3A;
+    --navy2:   #0F2847;
+    --gold:    #C9A84C;
+    --gold2:   #E8C96A;
+    --white:   #FFFFFF;
+    --offwhite:#F7F5F0;
+    --slate:   #94A3B8;
+    --muted:   #64748B;
+    --green:   #166534;
+    --greenlt: #DCFCE7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--offwhite);
+    color: var(--navy);
+    line-height: 1.6;
+  }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .bar {
+    background: var(--gold);
+    color: var(--navy);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 16px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(201,168,76,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(36px, 7vw, 68px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 6px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 3vw, 22px);
+    color: var(--slate);
+    margin-bottom: 32px;
+  }
+  .hero-body {
+    max-width: 560px;
+    margin: 0 auto 40px;
+    font-size: 16px;
+    color: #CBD5E1;
+    line-height: 1.7;
+  }
+
+  /* ── CREDENTIAL BAR — the signature element ── */
+  .cred-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 680px;
+    margin: 0 auto 44px;
+  }
+  .cred-item {
+    flex: 1;
+    min-width: 130px;
+    padding: 16px 12px;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    text-align: center;
+    background: rgba(255,255,255,0.04);
+  }
+  .cred-item:last-child { border-right: none; }
+  .cred-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .cred-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--slate);
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 16px 36px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:hover { background: var(--gold2); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.5);
+    color: var(--gold);
+    margin-left: 12px;
+  }
+  .btn-ghost:hover { background: rgba(201,168,76,0.1); }
+  .guarantee-note {
+    color: var(--slate);
+    font-size: 12px;
+    margin-top: 14px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 64px 24px; }
+  .inner { max-width: 720px; margin: 0 auto; }
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .lead {
+    font-size: 17px;
+    color: #374151;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  /* ── ORIGIN STORY ── */
+  .story { background: var(--navy); }
+  .story h2 { color: var(--white); }
+  .story .section-label { color: var(--gold); }
+  .story p { color: #CBD5E1; font-size: 16px; line-height: 1.8; margin-bottom: 18px; }
+  .story p:last-child { margin-bottom: 0; }
+  .story strong { color: var(--gold2); font-weight: 600; }
+
+  .pull-quote {
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin: 32px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 3vw, 24px);
+    color: var(--white);
+    line-height: 1.45;
+  }
+
+  /* ── PROBLEM ── */
+  .problem { background: var(--offwhite); }
+  .pain-list {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .pain-list li {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--white);
+    border-radius: 4px;
+    padding: 16px 18px;
+    font-size: 15px;
+    color: #374151;
+    border-left: 3px solid #E5E7EB;
+  }
+  .pain-list li .x { color: #DC2626; font-weight: 700; flex-shrink: 0; }
+
+  /* ── MODULES ── */
+  .modules { background: var(--white); }
+  .module-grid { display: grid; gap: 14px; margin-top: 32px; }
+  .module-card {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px 20px;
+    border: 1px solid #E5E7EB;
+    border-radius: 4px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .module-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 2px 12px rgba(201,168,76,0.12);
+  }
+  .module-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 40px;
+    padding-top: 2px;
+  }
+  .module-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .module-body {
+    font-size: 14px;
+    color: #4B5563;
+    line-height: 1.65;
+  }
+
+  /* ── BONUS ── */
+  .bonus-section { background: var(--navy2); }
+  .bonus-card {
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 4px;
+    padding: 28px 24px;
+    margin-top: 24px;
+    background: rgba(255,255,255,0.04);
+  }
+  .bonus-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold2);
+    margin-bottom: 10px;
+  }
+  .bonus-card p { color: #CBD5E1; font-size: 15px; line-height: 1.7; }
+
+  /* ── FOR WHO ── */
+  .forwho { background: var(--offwhite); }
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .who-card {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 20px 18px;
+    border-top: 3px solid var(--gold);
+  }
+  .who-card .icon { font-size: 22px; margin-bottom: 10px; }
+  .who-card h4 { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .who-card p { font-size: 13px; color: #4B5563; line-height: 1.6; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--white); }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 28px;
+  }
+  .testi-card {
+    background: var(--offwhite);
+    border-radius: 4px;
+    padding: 22px 18px;
+    border-left: 3px solid var(--gold);
+  }
+  .testi-text { font-size: 14px; color: #374151; line-height: 1.7; font-style: italic; margin-bottom: 14px; }
+  .testi-author { font-size: 12px; font-weight: 700; color: var(--navy); letter-spacing: 0.5px; }
+  .testi-role { font-size: 11px; color: var(--muted); }
+  .stars { color: var(--gold); font-size: 13px; margin-bottom: 10px; }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--navy); }
+  .price-card {
+    max-width: 480px;
+    margin: 32px auto 0;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.4);
+    border-radius: 6px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .price-header {
+    background: var(--gold);
+    padding: 20px 24px;
+  }
+  .price-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .price-header p { font-size: 13px; color: var(--navy); opacity: 0.75; }
+  .price-body { padding: 28px 24px; }
+  .price-amount {
+    font-family: 'Playfair Display', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .price-was {
+    font-size: 14px;
+    color: var(--slate);
+    text-decoration: line-through;
+    margin-bottom: 20px;
+  }
+  .include-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+    display: grid;
+    gap: 10px;
+  }
+  .include-list li {
+    font-size: 14px;
+    color: #CBD5E1;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .include-list li .ck { color: var(--gold); flex-shrink: 0; font-weight: 700; }
+  .guarantee {
+    margin-top: 20px;
+    padding: 14px;
+    background: rgba(22,101,52,0.25);
+    border: 1px solid rgba(74,222,128,0.2);
+    border-radius: 4px;
+    font-size: 13px;
+    color: #86EFAC;
+    line-height: 1.6;
+  }
+
+  /* ── FAQ ── */
+  .faq { background: var(--offwhite); }
+  .faq-list { margin-top: 28px; display: grid; gap: 12px; }
+  .faq-item {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 20px 20px;
+    border-left: 3px solid var(--gold);
+  }
+  .faq-q { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 8px; }
+  .faq-a { font-size: 14px; color: #4B5563; line-height: 1.7; }
+
+  /* ── FINAL CTA ── */
+  .final-cta { background: var(--navy); text-align: center; }
+  .final-cta h2 { color: var(--white); max-width: 540px; margin: 0 auto 16px; }
+  .final-cta p { color: var(--slate); font-size: 15px; max-width: 420px; margin: 0 auto 32px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060F1E;
+    padding: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: #334155;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-rule {
+    width: 48px;
+    height: 2px;
+    background: var(--gold);
+    margin: 0 0 24px;
+  }
+  .centered .gold-rule { margin: 0 auto 24px; }
+
+  @media (max-width: 540px) {
+    .cred-item { min-width: 100px; padding: 12px 8px; }
+    .cred-num { font-size: 20px; }
+    .btn-ghost { margin-left: 0; margin-top: 10px; }
+    .hero { padding: 48px 20px 40px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="bar">Launch Offer — Save 30% · Instant PDF Download · 30-Day Money-Back Guarantee</div>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="eyebrow">Standard Built Athletics Presents</div>
+  <h1>The <em>Devereaux</em> Method</h1>
+  <p class="hero-sub">A Championship Hitting System — Built in the Big Leagues</p>
+  <p class="hero-body">
+    Mike Devereaux didn't just play 12 seasons in Major League Baseball. He performed when it mattered most — earning NLCS MVP honors and a World Series ring with the 1995 Atlanta Braves. Now, for the first time, he's putting his complete hitting system into the hands of the next generation.
+  </p>
+
+  <!-- CREDENTIAL BAR -->
+  <div class="cred-bar">
+    <div class="cred-item">
+      <span class="cred-num">12</span>
+      <span class="cred-label">MLB Seasons</span>
+    </div>
+    <div class="cred-item">
+      <span class="cred-num">'95</span>
+      <span class="cred-label">World Series Champion</span>
+    </div>
+    <div class="cred-item">
+      <span class="cred-num">NLCS</span>
+      <span class="cred-label">MVP · 1995</span>
+    </div>
+    <div class="cred-item">
+      <span class="cred-num">HOF</span>
+      <span class="cred-label">Orioles Hall of Fame</span>
+    </div>
+    <div class="cred-item">
+      <span class="cred-num">5</span>
+      <span class="cred-label">MLB Organizations</span>
+    </div>
+  </div>
+
+  <div>
+    <a href="#pricing" class="btn">Get The Devereaux Method — $67</a>
+    <br><br>
+    <span class="guarantee-note">Instant PDF download · 30-day money-back guarantee</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ORIGIN STORY
+════════════════════════════════════════════════ -->
+<section class="story">
+  <div class="inner">
+    <div class="section-label">The Story Behind the System</div>
+    <h2>From a Driveway in Casper to the World Series</h2>
+    <div class="gold-rule"></div>
+    <p>
+      Mike Devereaux grew up in Casper, Wyoming — competing in every sport he could find, winning state championships at Kelly Walsh High School, and developing the habits and mindset that would carry him all the way to the major leagues. <strong>He didn't arrive as a finished product. He was built — rep by rep, game by game.</strong>
+    </p>
+    <p>
+      Twelve seasons across five organizations. The Dodgers. The Orioles. The White Sox. The Braves. The Rangers. Through all of it, Mike refined a hitting approach built on mechanics, discipline, preparation, and the ability to perform under the biggest pressure the game can create.
+    </p>
+
+    <div class="pull-quote">
+      "The 1995 NLCS. Braves versus Reds. Mike Devereaux — a late-season pickup — goes on a tear that no one saw coming. Three home runs. Eight RBI. Series MVP. That's not luck. That's a system."
+    </div>
+
+    <p>
+      That performance didn't happen in a vacuum. It was the product of a lifetime of work — a method for approaching the plate, reading pitchers, controlling the at-bat, and delivering when everything is on the line. <strong>The Devereaux Method is that system, written down and handed to you.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PROBLEM
+════════════════════════════════════════════════ -->
+<section class="problem">
+  <div class="inner">
+    <div class="section-label">Sound Familiar?</div>
+    <h2>Most hitters are working hard on the wrong things.</h2>
+    <div class="gold-rule"></div>
+    <p class="lead">
+      Your athlete is putting in the time. Tee work, cage sessions, BP every week. But something isn't clicking — and nobody can tell you exactly why.
+    </p>
+    <ul class="pain-list">
+      <li><span class="x">✗</span> Mechanics that look fine in the cage but fall apart in the game</li>
+      <li><span class="x">✗</span> No real approach at the plate — just reacting and hoping</li>
+      <li><span class="x">✗</span> Chasing pitches out of the zone under pressure</li>
+      <li><span class="x">✗</span> Struggling in two-strike counts with no plan</li>
+      <li><span class="x">✗</span> Generic YouTube instruction with no pro pedigree behind it</li>
+      <li><span class="x">✗</span> Training that builds confidence in the cage but not on the field</li>
+    </ul>
+    <p class="lead" style="margin-top: 28px;">
+      The difference between a good hitter and a great one isn't effort. It's having a proven system — and someone who's actually performed at the highest level to teach it.
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     MODULES
+════════════════════════════════════════════════ -->
+<section class="modules">
+  <div class="inner">
+    <div class="section-label">What's Inside</div>
+    <h2>Six Complete Systems. One Championship Approach.</h2>
+    <div class="gold-rule"></div>
+    <p class="lead">Every module is built from Mike's actual experience — not theory, not recycled coaching content. This is what it took to compete and perform at the major league level for 12 seasons.</p>
+    <div class="module-grid">
+
+      <div class="module-card">
+        <div class="module-num">I</div>
+        <div>
+          <div class="module-title">The Championship Mindset at the Plate</div>
+          <div class="module-body">How Mike approached big-game at-bats — NLCS, playoff pressure, high-leverage situations. The mental framework that separates hitters who show up in October from those who disappear. Includes the pre-at-bat routine Mike used throughout his career.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">II</div>
+        <div>
+          <div class="module-title">Hitting Mechanics — The Pro Foundation</div>
+          <div class="module-body">Stance, load, hip sequence, contact point, extension, follow-through. The non-negotiable mechanical foundation every serious hitter needs locked in before anything else can be built. Broken down step-by-step with correction cues.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">III</div>
+        <div>
+          <div class="module-title">Pitch Recognition & Plate Discipline</div>
+          <div class="module-body">How to read spin out of the hand, locate pitches early in flight, and stop expanding the zone under pressure. The approach that allowed Mike to hit .500 in the 1995 NLCS against elite pitching. Includes a two-strike approach framework.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">IV</div>
+        <div>
+          <div class="module-title">Situational Hitting Mastery</div>
+          <div class="module-body">Hit-and-run execution, sacrifice fly approach, opposite-field work, gap-to-gap hitting, runner on third with less than two outs. The complete situational toolkit that wins games at every level of baseball.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">V</div>
+        <div>
+          <div class="module-title">The Practice Blueprint</div>
+          <div class="module-body">Daily tee work progressions, soft toss sequences, live BP structure, and how to build real in-game mechanics — not just cage numbers. Includes a weekly practice schedule template for serious hitters.</div>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-num">VI</div>
+        <div>
+          <div class="module-title">From High School to the Next Level</div>
+          <div class="module-body">What college coaches and pro scouts are actually evaluating. How to prepare for showcases, what separates recruited players, and the mindset that allows athletes to keep developing beyond high school.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     BONUS
+════════════════════════════════════════════════ -->
+<section class="bonus-section">
+  <div class="inner">
+    <div class="section-label" style="color: var(--gold);">Included Free</div>
+    <h2 style="color: var(--white);">🎁 Bonus: The NLCS Breakdown</h2>
+    <div class="gold-rule"></div>
+    <div class="bonus-card">
+      <h3>Inside Mike's Most Clutch At-Bats</h3>
+      <p>
+        A coaching commentary breakdown of Mike Devereaux's 1995 NLCS MVP performance — what he was seeing, what approach he was using, and what any hitter can take from one of the most decorated postseason hitting performances of the decade. The at-bats that made a World Series ring possible, explained pitch by pitch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHO IT'S FOR
+════════════════════════════════════════════════ -->
+<section class="forwho">
+  <div class="inner">
+    <div class="section-label">Who This Is For</div>
+    <h2>Built for players who are serious. And the people behind them.</h2>
+    <div class="gold-rule"></div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="icon">⚾</div>
+        <h4>High School Hitters</h4>
+        <p>Freshman through seniors who want a real system — not more generic reps without a framework behind them.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">👨‍👩‍👦</div>
+        <h4>Parents of Athletes</h4>
+        <p>If you're investing in private lessons, showcases, and travel ball — your athlete needs a system to tie it all together.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">🏆</div>
+        <h4>Travel Ball Players</h4>
+        <p>AAU and club athletes competing at high levels who want the mental and mechanical edge their competition doesn't have.</p>
+      </div>
+      <div class="who-card">
+        <div class="icon">🎯</div>
+        <h4>Serious Prospects</h4>
+        <p>Players with college or pro aspirations who understand that development is a daily investment, not a weekend event.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS (placeholder framework)
+════════════════════════════════════════════════ -->
+<section class="testimonials">
+  <div class="inner">
+    <div class="section-label">Early Results</div>
+    <h2>What coaches and families are saying.</h2>
+    <div class="gold-rule"></div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The pitch recognition module alone changed how my son approaches every at-bat. He's not chasing nearly as much and his walk rate has gone up. Worth every penny."</p>
+        <div class="testi-author">Dave R.</div>
+        <div class="testi-role">Parent · Tri-Cities, WA</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"I've been coaching high school baseball for 9 years. The situational hitting section is the clearest breakdown of two-strike approach I've ever seen in print. My whole lineup is using it."</p>
+        <div class="testi-author">Coach T. Williams</div>
+        <div class="testi-role">Varsity Head Coach · Washington</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"My daughter committed to a D2 program this spring. We started working through this system in October. I'm not saying it's the only reason — but the timing isn't a coincidence."</p>
+        <div class="testi-author">Maria C.</div>
+        <div class="testi-role">Parent · Oregon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRICING
+════════════════════════════════════════════════ -->
+<section class="pricing" id="pricing">
+  <div class="inner" style="text-align: center;">
+    <div class="section-label" style="color: var(--gold);">Get Instant Access</div>
+    <h2 style="color: var(--white);">One payment. A lifetime of at-bats.</h2>
+    <div class="gold-rule" style="margin: 0 auto 0;"></div>
+    <div class="price-card">
+      <div class="price-header">
+        <h3>The Devereaux Method</h3>
+        <p>Complete Championship Hitting System</p>
+      </div>
+      <div class="price-body">
+        <div class="price-amount">$67</div>
+        <div class="price-was">Regular price $97</div>
+        <ul class="include-list">
+          <li><span class="ck">✓</span> All 6 hitting system modules (instant PDF)</li>
+          <li><span class="ck">✓</span> The Practice Blueprint — weekly training schedule template</li>
+          <li><span class="ck">✓</span> Two-strike approach framework</li>
+          <li><span class="ck">✓</span> Situational hitting toolkit</li>
+          <li><span class="ck">✓</span> The Next Level Guide — recruiting and showcase prep</li>
+          <li><span class="ck">✓</span> 🎁 BONUS: The NLCS Breakdown coaching commentary</li>
+          <li><span class="ck">✓</span> Instant download — use it today</li>
+        </ul>
+        <a href="#" class="btn" style="width: 100%; display: block; text-align: center; font-size: 16px; padding: 18px;">
+          Get Instant Access — $67
+        </a>
+        <div class="guarantee">
+          🛡️ 30-Day Money-Back Guarantee — If this system doesn't improve your approach at the plate, request a full refund. No questions asked.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════ -->
+<section class="faq">
+  <div class="inner">
+    <div class="section-label">Questions</div>
+    <h2>Everything you need to know.</h2>
+    <div class="gold-rule"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">What exactly do I get?</div>
+        <div class="faq-a">Six complete hitting system modules delivered as structured, printable PDFs — plus the bonus NLCS Breakdown coaching commentary. Instant download immediately after purchase. Works on any device or printed for the cage.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What age is this for?</div>
+        <div class="faq-a">The system is built for serious high school athletes and travel ball players — typically ages 13–18. The mechanics and approach content are applicable at any competitive level, and parents will find the framework valuable regardless of where their athlete is right now.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this a subscription?</div>
+        <div class="faq-a">No. One-time payment. You own it forever. No recurring charges, no membership required.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if it doesn't work for us?</div>
+        <div class="faq-a">Request a full refund within 30 days. No hoops to jump through, no questions asked. We stand behind this system completely.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Who is Mike Devereaux?</div>
+        <div class="faq-a">Mike Devereaux played 12 seasons in Major League Baseball with the Dodgers, Orioles, White Sox, Braves, and Rangers. He was named NLCS MVP in 1995 and won the World Series with the Atlanta Braves that same year. He was inducted into the Baltimore Orioles Hall of Fame in 2021 and is a National High School Hall of Fame inductee from Kelly Walsh High School in Casper, Wyoming. He has coached and instructed at the highest levels of player development, including IMG Academy.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="inner">
+    <div class="section-label" style="color: var(--gold); text-align: center;">Your Next At-Bat Is Coming</div>
+    <h2>Stop guessing. Start hitting with a system that won in October.</h2>
+    <p>Instant access. One-time payment. Built by a World Series champion for the player who's ready to compete at the next level.</p>
+    <a href="#pricing" class="btn">Get The Devereaux Method — $67</a>
+    <p style="color: var(--slate); font-size: 12px; margin-top: 16px;">30-day money-back guarantee · Instant PDF download</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2026 Standard Built Athletics LLC · standardbuiltathletics.com · Where Champions Are Made, Not Found.
+</footer>
+
+</body>
+</html>
